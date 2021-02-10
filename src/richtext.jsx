@@ -143,8 +143,9 @@ const Element = ({ attributes, children, element }) => {
 			return <ol {...attributes}>{children}</ol>;
 		case "edit-text":
 			return (<span contentEditable={false}>
-				<textarea style={{ userSelect: "none" }} contentEditable={false}
+				<textarea contentEditable={false}
 					style={{
+						userSelect: "none",
 						color: "gray",
 						backgroundColor: "lightyellow",
 						border: "1px solid black",

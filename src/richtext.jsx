@@ -128,6 +128,7 @@ const isMarkActive = (editor, format) => {
 };
 
 const Element = ({ attributes, children, element }) => {
+	const [editTextValue, setEditTextValue] = useState([]);
 	switch (element.type) {
 		case "block-quote":
 			return <blockquote {...attributes}>{children}</blockquote>;
@@ -142,8 +143,10 @@ const Element = ({ attributes, children, element }) => {
 		case "numbered-list":
 			return <ol {...attributes}>{children}</ol>;
 		case "edit-text":
+			console.log(children.props.node.children[0]);
 			return (<span contentEditable={false}>
-				<textarea style={{ userSelect: "none" }} contentEditable={false}
+				<textarea style={{ userSelect: "none" }} setcontentEditable={false}
+					onClick={() => {console.log(children.props.node.children[0])}}
 					style={{
 						color: "gray",
 						backgroundColor: "lightyellow",
@@ -167,14 +170,17 @@ const Element = ({ attributes, children, element }) => {
 const Leaf = ({ attributes, children, leaf }) => {
 	if (leaf.bold) {
 		children = <strong>{children}</strong>;
+		console.log(children.props.children.props.leaf);
 	}
 
 	if (leaf.italic) {
 		children = <em>{children}</em>;
+		console.log(children.props.children.props.leaf);
 	}
 
 	if (leaf.underline) {
 		children = <u>{children}</u>;
+		console.log(children.props.children.props.leaf);
 	}
 
 	if (leaf.input) {
@@ -193,6 +199,7 @@ const Leaf = ({ attributes, children, leaf }) => {
 				{children}
 			</span>
 		);
+		console.log(children.props.children.props.leaf)
 	}
 
 	return <span {...attributes}>{children}</span>;
